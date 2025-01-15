@@ -1,29 +1,18 @@
-# Nome do executável
-EXECUTABLE = output/main.exe
-
-# Compilador e flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -g3
+CXXFLAGS = -Wall -Wextra -g3 -I.
+LDFLAGS = -mconsole
 
-# Arquivos-fonte e objetos
-SOURCES = main.cpp Usuario.cpp Operacoes.cpp
+SOURCES = main.cpp Operacoes.cpp Compra.cpp Relatorio.cpp Usuario.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
+EXEC = sistema_controle_financeiro.exe
 
-# Regra padrão (compilar o programa)
-all: $(EXECUTABLE)
+all: $(EXEC)
 
-$(EXECUTABLE): $(OBJECTS)
-	@mkdir -p output
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJECTS)
+$(EXEC): $(OBJECTS)
+	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(EXEC)
 
-# Regra para compilar arquivos .cpp em .o
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $<
 
-# Limpar arquivos gerados
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
-
-# Executar o programa
-run: all
-	./$(EXECUTABLE)
+	rm -f $(OBJECTS) $(EXEC)
