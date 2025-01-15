@@ -1,8 +1,0 @@
-Lucas;abc
-Lucas;abc
-;Lucas
-Lucas;ab
-;Lucas
-Lucas;abc
-;1
-Lucas;abc

@@ -72,6 +72,7 @@ void menuPrincipal() {
             break;
         } else {
             cout << "Opção inválida!" << endl;
+        //TESTE
         }
     }
 }
