@@ -4,19 +4,18 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Usuario {
 private:
-    string nome;
-    string senha;
+    std::string nome;
+    std::string senha;
 
 public:
-    Usuario(const string& nome, const string& senha);
-    string criarUsuario() const;
-    static void salvarUsuario(const string& usuario, const string& arquivo = "data/usuarios.txt");
-    static vector<string> carregarUsuarios(const string& arquivo = "data/usuarios.txt");
-    static bool validarUsuario(const string& nome, const string& senha, const vector<string>& usuarios);
+    Usuario(const std::string& nome, const std::string& senha);
+
+    std::string criarUsuario() const;
+    static void salvarUsuario(const std::string& dados, const std::string& caminho);
+    static std::vector<std::string> carregarUsuarios(const std::string& caminho);
+    static bool validarUsuario(const std::string& nome, const std::string& senha, const std::vector<std::string>& usuarios);
 };
 
 #endif
