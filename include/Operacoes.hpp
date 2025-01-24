@@ -18,6 +18,10 @@ public:
 
     void carregarCompras();
     void salvarCompras();
+
+    // Declarações das novas funções
+    void menuCompras();  // Declaração da função menuCompras
+    void adicionarCompra();  // Declaração da função adicionarCompra
 };
 
 #endif

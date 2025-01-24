@@ -43,3 +43,15 @@ bool Usuario::validarUsuario(const std::string& nome, const std::string& senha, 
     }
     return false;
 }
+
+bool Usuario::usuarioExistente(const std::string& nome, const std::vector<std::string>& usuarios) {
+    for (const auto& usuario : usuarios) {
+        std::stringstream ss(usuario);
+        std::string nomeArquivo;
+        getline(ss, nomeArquivo, ';');
+        if (nomeArquivo == nome) {
+            return true;  // Usuário já existe
+        }
+    }
+    return false;  // Usuário não encontrado
+}
