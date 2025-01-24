@@ -5,7 +5,6 @@
 #include <sstream> // Para manipular strings
 #include <algorithm> // Para std::sort
 
-// Implementação da função de comparação
 bool Relatorio::compararPorData(const Compra& a, const Compra& b) {
     auto parseData = [](const std::string& data) {
         int dia, mes, ano;
