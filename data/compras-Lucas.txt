@@ -4,12 +4,4 @@
 4721.31;Lazer;31/01/2024
 10121;Alimentação;12/12/2024
 127;Transporte;05/02/2024
-2181;Transporte;01/02/2024
-100;Alimentação;01/01/2024
-200;Transporte;02/01/2024
-647289;Outros;10/01/2024
-4721.31;Lazer;31/01/2024
-10121;Alimentação;12/12/2024
-127;Transporte;05/02/2024
-2181;Transporte;01/02/2024
 10;Alimentação;01/01/2025

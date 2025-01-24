@@ -13,8 +13,26 @@ void Operacoes::addCompra(const Compra& compra) {
     salvarCompras(); // Salva as compras no arquivo após adicionar
 }
 
+// Função para comparar as compras por data (ano, mês, dia)
 bool compararPorData(const Compra& a, const Compra& b) {
-    return a.getData() < b.getData();  // Comparar por data
+    // Extraímos o ano, mês e dia das datas para comparação
+    std::string dataA = a.getData();
+    std::string dataB = b.getData();
+    
+    // Ano (primeiros 4 caracteres)
+    int anoA = std::stoi(dataA.substr(6, 4));
+    int anoB = std::stoi(dataB.substr(6, 4));
+    if (anoA != anoB) return anoA < anoB;
+    
+    // Mês (caracteres 4-5)
+    int mesA = std::stoi(dataA.substr(3, 2));
+    int mesB = std::stoi(dataB.substr(3, 2));
+    if (mesA != mesB) return mesA < mesB;
+    
+    // Dia (caracteres 0-1)
+    int diaA = std::stoi(dataA.substr(0, 2));
+    int diaB = std::stoi(dataB.substr(0, 2));
+    return diaA < diaB;
 }
 
 void Operacoes::listarCompras() const {
@@ -23,7 +41,7 @@ void Operacoes::listarCompras() const {
         return;
     }
 
-    // Ordenar as compras por data
+    // Ordenar as compras por data (ano, mês, dia)
     std::vector<Compra> comprasOrdenadas = compras;
     std::sort(comprasOrdenadas.begin(), comprasOrdenadas.end(), compararPorData);
 

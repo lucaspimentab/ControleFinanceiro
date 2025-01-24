@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Relatorio.hpp"
 
-
 void Sistema::iniciar() {
     while (true) {
         exibirMenuPrincipal();
@@ -75,7 +74,12 @@ void Sistema::fazerLogin() {
 void Sistema::menuCompras(Operacoes& operacoes) {
     while (true) {
         std::cout << "\n--- Menu de Compras ---\n";
-        std::cout << "1. Adicionar compra\n2. Listar compras\n3. Logout\nEscolha uma opção: ";
+        std::cout << "1. Adicionar compra\n";
+        std::cout << "2. Listar compras\n";
+        std::cout << "3. Gerar relatório\n";  // Nova opção para gerar relatório
+        std::cout << "4. Logout\n";  // Mover a opção de logout para o final
+        std::cout << "Escolha uma opção: ";
+        
         int escolha;
         std::cin >> escolha;
         std::cin.ignore();
@@ -84,8 +88,9 @@ void Sistema::menuCompras(Operacoes& operacoes) {
             operacoes.adicionarCompra();
         } else if (escolha == 2) {
             operacoes.listarCompras();
-            gerarRelatorio(operacoes);  // Chama a geração de relatório
         } else if (escolha == 3) {
+            gerarRelatorio(operacoes);  // Chama a geração de relatório quando a opção 3 for escolhida
+        } else if (escolha == 4) {
             break;  // Logout
         } else {
             std::cout << "Opção inválida!\n";
