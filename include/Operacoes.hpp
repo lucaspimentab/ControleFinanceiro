@@ -13,7 +13,7 @@ public:
     Operacoes(const std::string& nomeUsuario);
 
     void addCompra(const Compra& compra);
-    void listarCompras() const;
+    void listarCompras();
     const std::vector<Compra>& getCompras() const;
 
     void carregarCompras();

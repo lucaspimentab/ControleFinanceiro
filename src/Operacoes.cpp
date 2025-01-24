@@ -35,7 +35,7 @@ bool compararPorData(const Compra& a, const Compra& b) {
     return diaA < diaB;
 }
 
-void Operacoes::listarCompras() const {
+void Operacoes::listarCompras() {
     if (compras.empty()) {
         std::cout << "Nenhuma compra registrada." << std::endl;
         return;
@@ -46,10 +46,24 @@ void Operacoes::listarCompras() const {
     std::sort(comprasOrdenadas.begin(), comprasOrdenadas.end(), compararPorData);
 
     std::cout << "--- Lista de Compras ---" << std::endl;
-    for (const auto& compra : comprasOrdenadas) {
-        std::cout << "Valor: R$ " << std::fixed << std::setprecision(2) << compra.getValor()
-                  << ", Categoria: " << compra.getCategoria()
-                  << ", Data: " << compra.getData() << std::endl;
+    for (size_t i = 0; i < comprasOrdenadas.size(); ++i) {
+        std::cout << i + 1 << ". Valor: R$ " << std::fixed << std::setprecision(2) << comprasOrdenadas[i].getValor()
+                  << ", Categoria: " << comprasOrdenadas[i].getCategoria()
+                  << ", Data: " << comprasOrdenadas[i].getData() << std::endl;
+    }
+
+    // Opção para excluir uma compra
+    size_t opcaoExcluir;
+    std::cout << "\nDigite o número da compra que deseja remover (0 para voltar): ";
+    std::cin >> opcaoExcluir;
+    std::cin.ignore();
+
+    if (opcaoExcluir > 0 && opcaoExcluir <= comprasOrdenadas.size()) {
+        compras.erase(compras.begin() + opcaoExcluir - 1);  // Remove a compra escolhida
+        salvarCompras(); // Salva as compras após a remoção
+        std::cout << "Compra removida com sucesso!\n";
+    } else if (opcaoExcluir != 0) {
+        std::cout << "Opção inválida!\n";
     }
 }
 

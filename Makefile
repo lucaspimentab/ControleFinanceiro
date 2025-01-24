@@ -14,8 +14,8 @@ SOURCES = $(wildcard $(SRCDIR)/*.cpp)
 OBJECTS = $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 EXEC = $(BINDIR)/sistema_controle_financeiro.exe
 
-# Regra padrão
-all: $(EXEC) run
+# Regra padrão (apenas compila)
+all: $(EXEC)
 
 # Como gerar o executável a partir dos objetos
 $(EXEC): $(OBJECTS)
@@ -32,4 +32,4 @@ clean:
 # Regra para rodar o programa após a compilação
 run: $(EXEC)
 	@echo "Executando o programa..."
-	@./$(EXEC)  # Executa o programa
+	@./$(EXEC)
