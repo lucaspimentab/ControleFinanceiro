@@ -2,11 +2,11 @@
 #define OPERACOES_HPP
 
 #include <vector>
-#include "Compra.hpp" // Certifique-se de incluir o cabeçalho correto
+#include "Compra.hpp" 
 
 class Operacoes {
 private:
-    std::vector<Compra> compras; // Agora a classe Compra será reconhecida
+    std::vector<Compra> compras; 
     std::string nomeUsuario;
 
 public:
@@ -19,9 +19,8 @@ public:
     void carregarCompras();
     void salvarCompras();
 
-    // Declarações das novas funções
-    void menuCompras();  // Declaração da função menuCompras
-    void adicionarCompra();  // Declaração da função adicionarCompra
+    void menuCompras();  
+    void adicionarCompra();  
 };
 
 #endif

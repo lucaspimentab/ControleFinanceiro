@@ -76,8 +76,8 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         std::cout << "\n--- Menu de Compras ---\n";
         std::cout << "1. Adicionar compra\n";
         std::cout << "2. Listar compras\n";
-        std::cout << "3. Gerar relatório\n";  // Nova opção para gerar relatório
-        std::cout << "4. Logout\n";  // Mover a opção de logout para o final
+        std::cout << "3. Gerar relatório\n";  
+        std::cout << "4. Logout\n";  
         std::cout << "Escolha uma opção: ";
         
         int escolha;
@@ -89,7 +89,7 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         } else if (escolha == 2) {
             operacoes.listarCompras();
         } else if (escolha == 3) {
-            gerarRelatorio(operacoes);  // Chama a geração de relatório quando a opção 3 for escolhida
+            gerarRelatorio(operacoes);  
         } else if (escolha == 4) {
             break;  // Logout
         } else {

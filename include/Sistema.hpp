@@ -6,7 +6,7 @@
 
 class Sistema {
 public:
-    void iniciar(); // Método para iniciar o sistema
+    void iniciar(); 
 
 private:
     void exibirMenuPrincipal(); // Exibe o menu principal
