@@ -14,6 +14,7 @@ private:
     void fazerLogin();          // Função para realizar login
     void menuCompras(Operacoes& operacoes); // Menu de compras
     void gerarRelatorio(Operacoes& operacoes); // Geração de relatórios
+    void exibirEstatisticas(Operacoes& operacoes);
 };
 
 #endif
