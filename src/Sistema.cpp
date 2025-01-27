@@ -1,8 +1,9 @@
+#include <iostream>
 #include "Sistema.hpp"
 #include "Usuario.hpp"
 #include "Operacoes.hpp"
-#include <iostream>
 #include "Relatorio.hpp"
+#include "Estatistica.hpp"
 
 void Sistema::iniciar() {
     while (true) {
@@ -77,7 +78,8 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         std::cout << "1. Adicionar compra\n";
         std::cout << "2. Listar compras\n";
         std::cout << "3. Gerar relatório\n";  
-        std::cout << "4. Logout\n";  
+        std::cout << "4. Ver estatísticas\n"; // Nova opção
+        std::cout << "5. Logout\n";  
         std::cout << "Escolha uma opção: ";
         
         int escolha;
@@ -91,6 +93,8 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         } else if (escolha == 3) {
             gerarRelatorio(operacoes);  
         } else if (escolha == 4) {
+            exibirEstatisticas(operacoes);
+        } else if (escolha == 5) {
             break;  // Logout
         } else {
             std::cout << "Opção inválida!\n";
@@ -120,5 +124,21 @@ void Sistema::gerarRelatorio(Operacoes& operacoes) {
         Relatorio::gerarRelatorioAnual(operacoes.getCompras(), ano);
     } else {
         std::cout << "Não foi gerado nenhum relatório.\n";
+    }
+}
+
+void Sistema::exibirEstatisticas(Operacoes& operacoes) {
+    Estatistica estatisticas(operacoes.getCompras());
+    estatisticas.calcularGastosPorCategoria();
+    estatisticas.exibirEstatisticas();  // Exibe os gastos por categoria
+
+    float salario;
+    std::cout << "\nDeseja comparar os gastos com seu salário? (S/N): ";
+    char opcao;
+    std::cin >> opcao;
+    if (opcao == 'S' || opcao == 's') {
+        std::cout << "Digite o seu salário: R$ ";
+        std::cin >> salario;
+        estatisticas.analisarComBaseSalario(salario);  // Compara com o salário do usuário
     }
 }

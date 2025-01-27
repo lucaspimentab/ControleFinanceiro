@@ -25,9 +25,9 @@ $(EXEC): $(OBJECTS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $(OBJDIR)/$(@F)
 
-# Limpeza dos arquivos objetos e executável (mantendo os diretórios)
+# Limpeza dos arquivos objetos e executável (mas mantendo o diretório bin)
 clean:
-	rm -rf $(OBJDIR)/*.o $(BINDIR)/$(EXEC)
+	rm -f $(OBJDIR)/*.o $(BINDIR)/*
 
 # Regra para rodar o programa após a compilação
 run: $(EXEC)
