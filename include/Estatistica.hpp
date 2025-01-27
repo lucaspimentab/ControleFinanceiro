@@ -11,18 +11,18 @@ public:
     Estatistica(const std::vector<Compra>& compras);
 
     // Funções principais
-    void calcularGastosPorCategoria();
-    void exibirEstatisticas() const;
-    void analisarComBaseSalario(float salario) const;
+    void calcularGastosPorCategoria();         // Calcula os gastos por categoria
+    void exibirEstatisticas();                 // Exibe as estatísticas gerais
+    void analisarComBaseSalario(float salario) const; // Analisa os gastos com base no salário
+    void exibirComparacaoComSalario(float salario) const; // Exibe comparação com o salário
 
 private:
-    std::vector<Compra> compras;
-    std::map<std::string, float> gastosPorCategoria;
-    float totalGasto;
+    std::vector<Compra> compras;               // Lista de compras
+    std::map<std::string, float> gastosPorCategoria; // Mapa de categoria -> valor gasto
+    float totalGasto;                          // Total gasto pelo usuário
 
     // Funções auxiliares
-    void calcularTotalGasto();
-    void exibirComparacaoComSalario(float salario) const;
+    void calcularTotalGasto();                 // Calcula o total gasto
 };
 
 #endif

@@ -128,17 +128,42 @@ void Sistema::gerarRelatorio(Operacoes& operacoes) {
 }
 
 void Sistema::exibirEstatisticas(Operacoes& operacoes) {
-    Estatistica estatisticas(operacoes.getCompras());
-    estatisticas.calcularGastosPorCategoria();
-    estatisticas.exibirEstatisticas();  // Exibe os gastos por categoria
+    std::cout << "--- Estatísticas de Gastos ---\n";
 
-    float salario;
-    std::cout << "\nDeseja comparar os gastos com seu salário? (S/N): ";
-    char opcao;
-    std::cin >> opcao;
-    if (opcao == 'S' || opcao == 's') {
-        std::cout << "Digite o seu salário: R$ ";
-        std::cin >> salario;
-        estatisticas.analisarComBaseSalario(salario);  // Compara com o salário do usuário
+    // Pergunta se o usuário quer estatísticas mensais ou anuais
+    std::cout << "Escolha o período para as estatísticas:\n";
+    std::cout << "1. Mensal\n2. Anual\nEscolha uma opção: ";
+    int periodo;
+    std::cin >> periodo;
+    std::cin.ignore();
+
+    int mes = 0, ano = 0;
+
+    if (periodo == 1) {
+        std::cout << "Digite o mês (1-12): ";
+        std::cin >> mes;
+        std::cout << "Digite o ano: ";
+        std::cin >> ano;
+    } else if (periodo == 2) {
+        std::cout << "Digite o ano: ";
+        std::cin >> ano;
+    } else {
+        std::cout << "Opção inválida!\n";
+        return;
     }
+
+    // Filtra as compras com base no período escolhido (mensal ou anual)
+    std::vector<Compra> comprasFiltradas;
+    for (const auto& compra : operacoes.getCompras()) {
+        int compraMes, compraAno;
+        std::sscanf(compra.getData().c_str(), "%d/%d/%d", &compraMes, &compraAno, &compraAno);
+
+        if ((periodo == 1 && compraMes == mes && compraAno == ano) || 
+            (periodo == 2 && compraAno == ano)) {
+            comprasFiltradas.push_back(compra);
+        }
+    }
+
+    Estatistica estatistica(comprasFiltradas); // Passa as compras filtradas para a classe Estatistica
+    estatistica.exibirEstatisticas(); // Chama a função exibirEstatisticas de Estatistica
 }
