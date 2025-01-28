@@ -360,3 +360,6 @@
 10;Outros;01/03/2024
 10;Tecnologia;21/01/2024
 10;Arroz;01/01/2024
+0;Alimentação;01/01/2024
+100;Alimentação;01/01/2024
+15000;Transporte;01/01/2024
