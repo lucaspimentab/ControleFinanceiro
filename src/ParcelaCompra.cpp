@@ -36,5 +36,4 @@ float ParcelaCompra::getValorParcela(int index) const {
         return valoresParcelas[index];
     }
     throw std::out_of_range("Índice de parcela inválido");
-    return 0.0f; // Nunca será executado, mas garante conformidade com o compilador
 }

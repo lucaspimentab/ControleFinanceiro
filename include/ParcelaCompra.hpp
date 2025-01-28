@@ -14,7 +14,7 @@ public:
 
     int getNumParcelas() const;
     std::vector<float> getValoresParcelas() const;
-    float getValorParcela(int index) const; // Método para obter o valor de uma parcela específica
+    float getValorParcela(int index) const;
 };
 
 #endif

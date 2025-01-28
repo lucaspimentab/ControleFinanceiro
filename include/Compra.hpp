@@ -14,6 +14,9 @@ private:
 public:
     Compra(float valor, const std::string& categoria, const std::string& data);
 
+    // Adicione um destrutor virtual
+    virtual ~Compra() = default;
+
     float getValor() const;
     std::string getCategoria() const;
     std::string getData() const;
