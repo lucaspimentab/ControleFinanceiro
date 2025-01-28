@@ -1,5 +1,6 @@
 #include "Operacoes.hpp"
 #include "Compra.hpp"
+#include "ParcelaCompra.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -120,8 +121,13 @@ void Operacoes::adicionarCompra() {
     std::cin >> valor;
     std::cin.ignore();
 
-    // Agora, você usa a instância da classe Categoria para acessar as categorias
-    const auto& categorias = categoria.obterCategorias();  // Aqui você usa a instância de Categoria
+    if (valor <= 0) {
+        std::cout << "O valor da compra deve ser maior que zero.\n";
+        return;
+    }
+
+    // Acessa as categorias disponíveis
+    const auto& categorias = categoria.obterCategorias(); 
     if (categorias.empty()) {
         std::cout << "Nenhuma categoria disponível. Adicione uma antes de continuar." << std::endl;
         return;
@@ -142,22 +148,68 @@ void Operacoes::adicionarCompra() {
         return;
     }
 
-    categoriaEscolhida = categorias[opcaoCategoria - 1];  // Aqui você usa a categoria selecionada
+    categoriaEscolhida = categorias[opcaoCategoria - 1];
 
-    std::string data;
-    std::cout << "Digite a data da compra (formato: dd/mm/aaaa): ";
-    std::getline(std::cin, data);
+    // Perguntar se é à vista ou parcelado
+    std::cout << "\nA compra será:\n1. À vista\n2. Parcelada\nEscolha uma opção: ";
+    int opcaoPagamento;
+    std::cin >> opcaoPagamento;
+    std::cin.ignore();
 
-    if (data.size() != 10 || data[2] != '/' || data[5] != '/') {
-        std::cout << "Formato de data inválido! Por favor, use o formato dd/mm/aaaa." << std::endl;
-        return;
+    if (opcaoPagamento == 1) {
+        // Compra à vista
+        std::string data;
+        std::cout << "Digite a data da compra (formato: dd/mm/aaaa): ";
+        std::getline(std::cin, data);
+
+        if (data.size() != 10 || data[2] != '/' || data[5] != '/') {
+            std::cout << "Formato de data inválido! Por favor, use o formato dd/mm/aaaa." << std::endl;
+            return;
+        }
+
+        Compra compra(valor, categoriaEscolhida, data);
+        addCompra(compra);
+        std::cout << "Compra à vista adicionada com sucesso!" << std::endl;
+
+    } else if (opcaoPagamento == 2) {
+        // Compra parcelada
+        int numParcelas;
+        std::cout << "Digite o número de parcelas: ";
+        std::cin >> numParcelas;
+        std::cin.ignore();
+
+        if (numParcelas <= 0) {
+            std::cout << "Número de parcelas inválido!\n";
+            return;
+        }
+
+        std::string data;
+        std::cout << "Digite a data da primeira parcela (formato: dd/mm/aaaa): ";
+        std::getline(std::cin, data);
+
+        if (data.size() != 10 || data[2] != '/' || data[5] != '/') {
+            std::cout << "Formato de data inválido! Por favor, use o formato dd/mm/aaaa." << std::endl;
+            return;
+        }
+
+        try {
+            ParcelaCompra parcelaCompra(valor, categoriaEscolhida, data, numParcelas);
+            addCompra(parcelaCompra);
+            std::cout << "Compra parcelada adicionada com sucesso!\n";
+
+            // Exibir os valores de cada parcela
+            const auto& parcelas = parcelaCompra.getValoresParcelas();
+            std::cout << "Detalhamento das parcelas:\n";
+            for (size_t i = 0; i < parcelas.size(); ++i) {
+                std::cout << "Parcela " << i + 1 << ": R$ " << parcelas[i] << "\n";
+            }
+        } catch (const std::exception& e) {
+            std::cout << "Erro ao adicionar compra parcelada: " << e.what() << "\n";
+        }
+    } else {
+        std::cout << "Opção de pagamento inválida!\n";
     }
-
-    Compra compra(valor, categoriaEscolhida, data);
-    addCompra(compra);
-    std::cout << "Compra adicionada com sucesso!" << std::endl;
 }
-
 
 void Operacoes::mudarCategorias() {
     while (true) {
