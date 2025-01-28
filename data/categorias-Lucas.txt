@@ -1,0 +1,7 @@
+Alimentação
+Transporte
+Saúde
+Lazer
+Educação
+Outros
+Tecnologia

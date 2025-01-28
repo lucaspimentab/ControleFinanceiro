@@ -8,21 +8,28 @@
 
 class Estatistica {
 public:
-    Estatistica(const std::vector<Compra>& compras);
+    // Construtor: Recebe uma lista de compras para análise estatística.
+    explicit Estatistica(const std::vector<Compra>& compras);
 
-    // Funções principais
-    void calcularGastosPorCategoria();         // Calcula os gastos por categoria
-    void exibirEstatisticas();                 // Exibe as estatísticas gerais
-    void analisarComBaseSalario(float salario) const; // Analisa os gastos com base no salário
-    void exibirComparacaoComSalario(float salario) const; // Exibe comparação com o salário
+    // Calcula os gastos por categoria e armazena no mapa.
+    void calcularGastosPorCategoria();         
+
+    // Exibe estatísticas gerais, incluindo gastos por categoria e total.
+    void exibirEstatisticas();                 
+
+    // Analisa os gastos com base no salário do usuário.
+    void analisarComBaseSalario(float salario) const; 
+
+    // Exibe uma comparação dos gastos com o salário informado.
+    void exibirComparacaoComSalario(float salario) const; 
 
 private:
-    std::vector<Compra> compras;               // Lista de compras
+    const std::vector<Compra> compras;               // Lista de compras analisadas (imutável)
     std::map<std::string, float> gastosPorCategoria; // Mapa de categoria -> valor gasto
-    float totalGasto;                          // Total gasto pelo usuário
+    float totalGasto;                                // Total gasto calculado
 
-    // Funções auxiliares
-    void calcularTotalGasto();                 // Calcula o total gasto
+    // Calcula o total gasto somando os valores de todas as compras.
+    void calcularTotalGasto();              
 };
 
 #endif

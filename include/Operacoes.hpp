@@ -2,13 +2,15 @@
 #define OPERACOES_HPP
 
 #include <vector>
-#include "Compra.hpp" 
+#include "Compra.hpp"
+#include "Categoria.hpp"
 
 class Operacoes {
 private:
     std::vector<Compra> compras; 
     std::string nomeUsuario;
-
+    Categoria categoria; 
+    
 public:
     Operacoes(const std::string& nomeUsuario);
 
@@ -18,9 +20,13 @@ public:
 
     void carregarCompras();
     void salvarCompras();
-
     void menuCompras();  
     void adicionarCompra();  
+
+    void mudarCategorias();
+    void adicionarCategoria();
+    void removerCategoria();
+    void listarCategorias();
 };
 
 #endif
