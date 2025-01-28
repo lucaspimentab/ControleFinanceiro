@@ -90,7 +90,16 @@ void Operacoes::carregarCompras() {
 void Operacoes::salvarCompras() {
     std::ofstream arquivo("data/compras-" + nomeUsuario + ".txt");
     for (const auto& compra : compras) {
-        arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
+        if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
+            // Compra parcelada
+            arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << ";Parcelada;" << parcelaCompra->getNumParcelas() << std::endl;
+            for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
+                arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << "Data da Parcela" << ";Parcela;" << (i + 1) << "/" << parcelaCompra->getNumParcelas() << std::endl;
+            }
+        } else {
+            // Compra à vista
+            arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << ";À Vista" << std::endl;
+        }
     }
 }
 
