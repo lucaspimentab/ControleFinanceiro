@@ -15,13 +15,6 @@ std::string Compra::getData() const {
     return data;
 }
 
-bool Compra::categoriaValida(int opcao) {
-    static const std::vector<std::string> categorias = {
-        "Alimentação", "Transporte", "Saúde", "Lazer", "Educação", "Outros"
-    };
-    return opcao > 0 && opcao <= static_cast<int>(categorias.size());
-}
-
-std::vector<std::string> Compra::obterCategorias() {
-    return {"Alimentação", "Transporte", "Saúde", "Lazer", "Educação", "Outros"};
+bool Compra::categoriaValida(int opcao, const Categoria& categoriaManager) {
+    return opcao > 0 && opcao <= static_cast<int>(categoriaManager.obterCategorias().size());
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "Categoria.hpp" // Inclui a classe Categoria
 
 class Compra {
 private:
@@ -17,8 +18,7 @@ public:
     std::string getCategoria() const;
     std::string getData() const;
 
-    static bool categoriaValida(int opcao);
-    static std::vector<std::string> obterCategorias(); // Adicionado
+    static bool categoriaValida(int opcao, const Categoria& categoriaManager);
 };
 
 #endif

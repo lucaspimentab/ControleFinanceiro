@@ -74,30 +74,32 @@ void Sistema::fazerLogin() {
 
 void Sistema::menuCompras(Operacoes& operacoes) {
     while (true) {
-        std::cout << "\n--- Menu de Compras ---\n";
-        std::cout << "1. Adicionar compra\n";
-        std::cout << "2. Listar compras\n";
-        std::cout << "3. Gerar relatório\n";  
-        std::cout << "4. Ver estatísticas\n"; // Nova opção
-        std::cout << "5. Logout\n";  
-        std::cout << "Escolha uma opção: ";
-        
+        std::cout << "\n--- Menu de Compras ---\n"
+                  << "1. Adicionar compra\n"
+                  << "2. Listar compras\n"
+                  << "3. Gerar relatório\n"
+                  << "4. Ver estatísticas\n"
+                  << "5. Mudar categorias\n"
+                  << "6. Logout\n"
+                  << "Escolha uma opção: ";
         int escolha;
         std::cin >> escolha;
-        std::cin.ignore();
+        std::cin.ignore();  // Limpa o buffer de entrada
 
         if (escolha == 1) {
             operacoes.adicionarCompra();
         } else if (escolha == 2) {
             operacoes.listarCompras();
         } else if (escolha == 3) {
-            gerarRelatorio(operacoes);  
+            gerarRelatorio(operacoes);  // Passa 'operacoes' como argumento
         } else if (escolha == 4) {
-            exibirEstatisticas(operacoes);
+            exibirEstatisticas(operacoes);  // Passa 'operacoes' como argumento
         } else if (escolha == 5) {
+            operacoes.mudarCategorias();
+        } else if (escolha == 6) {
             break;  // Logout
         } else {
-            std::cout << "Opção inválida!\n";
+            std::cout << "Opção inválida!" << std::endl;
         }
     }
 }
