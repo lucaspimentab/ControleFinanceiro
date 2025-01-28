@@ -156,9 +156,10 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
 
     // Filtra as compras com base no período escolhido (mensal ou anual)
     std::vector<Compra> comprasFiltradas;
+
     for (const auto& compra : operacoes.getCompras()) {
-        int compraMes, compraAno;
-        std::sscanf(compra.getData().c_str(), "%d/%d/%d", &compraMes, &compraAno, &compraAno);
+        int compraDia = 0, compraMes = 0, compraAno = 0; // Declare as variáveis aqui
+        std::sscanf(compra.getData().c_str(), "%d/%d/%d", &compraDia, &compraMes, &compraAno);
 
         if ((periodo == 1 && compraMes == mes && compraAno == ano) || 
             (periodo == 2 && compraAno == ano)) {

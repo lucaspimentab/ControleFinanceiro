@@ -4,3 +4,4 @@ Saúde
 Lazer
 Educação
 Outros
+Tecnologia
