@@ -6,6 +6,7 @@
 #include "Relatorio.hpp"
 #include "Estatistica.hpp"
 #include "Configuracao.hpp"
+#include "Utils.hpp"
 
 void Sistema::iniciar() {
     while (true) {
@@ -42,16 +43,6 @@ void Sistema::exibirMenuPrincipal() {
             std::cout << "Opção inválida! Tente novamente.\n";
         }
     }
-}
-
-// Função auxiliar para validar nome (somente letras e espaços)
-bool validarNome(const std::string& nome) {
-    return std::regex_match(nome, std::regex("^[A-Za-zÀ-ÿ ]+$"));
-}
-
-// Função auxiliar para validar salário (somente números)
-bool validarSalario(const std::string& salario) {
-    return std::regex_match(salario, std::regex("^[0-9]+(\\.[0-9]+)?$"));
 }
 
 void Sistema::criarUsuario() {

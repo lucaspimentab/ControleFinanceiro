@@ -1,16 +1,24 @@
 #include "Configuracao.hpp"
 #include "Usuario.hpp"
+#include "Utils.hpp"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
+#include <regex>  
 
 Configuracao::Configuracao(const std::string& nomeUsuario, const std::string& caminho)
     : nomeUsuario(nomeUsuario), caminho(caminho) {}
 
+
 void Configuracao::alterarNome(const std::string& novoNome) {
+    // Validação do nome
+    if (!validarNome(novoNome)) {
+        std::cout << "Erro: Nome inválido! Use apenas letras e espaços.\n";
+        return;
+    }
+
     std::vector<std::string> usuarios = Usuario::carregarUsuarios(caminho);
 
     // Verifica se o novo nome já existe
@@ -45,7 +53,6 @@ void Configuracao::alterarNome(const std::string& novoNome) {
     std::cout << "Nome alterado com sucesso!\n";
 }
 
-
 void Configuracao::alterarSenha(const std::string& novaSenha) {
     std::vector<std::string> usuarios = Usuario::carregarUsuarios(caminho);
     for (auto& linha : usuarios) {
@@ -65,6 +72,12 @@ void Configuracao::alterarSenha(const std::string& novaSenha) {
 }
 
 void Configuracao::alterarSalario(const std::string& novoSalario) {
+    // Validação do salário
+    if (!validarSalario(novoSalario)) {
+        std::cout << "Erro: Salário inválido! Use apenas números.\n";
+        return;
+    }
+
     std::vector<std::string> usuarios = Usuario::carregarUsuarios(caminho);
     for (auto& linha : usuarios) {
         std::stringstream ss(linha);
