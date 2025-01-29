@@ -94,16 +94,16 @@ void Operacoes::salvarCompras() {
     std::ofstream arquivo("data/compras-" + nomeUsuario + ".txt");
     for (const auto& compra : compras) {
         // Verifica se a compra é uma compra parcelada
-        // if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
-        //     // Compra parcelada
-        //     arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        //     for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
-        //         arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        //     }
-        // } else {
-        //     // Compra à vista
+         if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
+             // Compra parcelada
+             arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
+             for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
+                 arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
+             }
+         } else {
+             // Compra à vista
             arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        // }
+         }
     }
 }
 
@@ -212,7 +212,7 @@ void Operacoes::adicionarCompra() {
             return;
         }
 
-        ParcelaCompra::ParcelarCompra(valor, categoriaEscolhida, data, numParcelas, *this);
+        //ParcelaCompra::ParcelarCompra(valor, categoriaEscolhida, data, numParcelas, *this);
         
         // addCompra(parcelaCompra);
         // Exibir os valores de cada parcela

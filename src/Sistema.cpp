@@ -5,6 +5,7 @@
 #include "Relatorio.hpp"
 #include "Estatistica.hpp"
 #include "Configuracao.hpp"
+#include <limits>
 
 void Sistema::iniciar() {
     while (true) {
@@ -13,19 +14,19 @@ void Sistema::iniciar() {
 }
 
 void Sistema::exibirMenuPrincipal() {
-    // while(true){
+     while(true){
         std::cout << "--- Bem-vindo ao Sistema de Controle Financeiro ---\n";
         std::cout << "1. Criar usuário\n2. Fazer login\n3. Sair\nEscolha uma opção: ";
         
         int opcao;
         std::cin >> opcao;
-        // if (std::cin.fail())
-        // {
-        //     std::cin.clear();
-        //     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //     std::cout << "Entrada inválida! Por favor, insira um número." << std::endl;
-        //     continue;
-        // }
+         if (std::cin.fail())
+         {
+             std::cin.clear();
+             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+             std::cout << "Entrada inválida! Por favor, insira um número." << std::endl;
+             continue;
+         }
         std::cin.ignore();
         if (opcao == 1) {
             criarUsuario();
@@ -39,7 +40,7 @@ void Sistema::exibirMenuPrincipal() {
         } else {
             std::cout << "Opção inválida!\n";
         }
-    // }
+     }
 }
 
 void Sistema::criarUsuario() {
