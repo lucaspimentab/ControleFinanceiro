@@ -4,8 +4,8 @@
 #include "Sistema.hpp"        // Inclua o cabeçalho da classe Sistema
 #include "Operacoes.hpp"
 
-Estatistica::Estatistica(const std::vector<Compra>& compras) 
-    : compras(compras), totalGasto(0.0f) {}
+Estatistica::Estatistica(const std::vector<Compra>& compras, float salario) 
+    : compras(compras), totalGasto(0.0f), salarioUsuario(salario) {}
 
 void Estatistica::calcularTotalGasto() {
     totalGasto = 0.0f;
@@ -42,22 +42,15 @@ void Estatistica::exibirEstatisticas() {
                   << " (" << std::fixed << std::setprecision(2) << porcentagem << "%)\n";
     }
 
-    char opcao;
-    std::cout << "Deseja comparar os gastos com seu salário? (S/N): ";
-    std::cin >> opcao;
-
-    if (opcao == 'S' || opcao == 's') {
-        float salario;
-        std::cout << "Digite o seu salário: R$ ";
-        std::cin >> salario;
-
-        if (salario > 0) {
-            exibirComparacaoComSalario(salario);
-        } else {
-            std::cout << "Salário inválido! Não é possível calcular a comparação.\n";
-        }
+    std::cout << "\n--- Comparação com Salário ---\n";
+    for (const auto& [categoria, valor] : gastosPorCategoria) {
+        float porcentagemSalario = (valor / salarioUsuario) * 100;
+        std::cout << "Categoria: " << categoria 
+                  << " - " << std::fixed << std::setprecision(2) << porcentagemSalario
+                  << "% do salário" << std::endl;
     }
 }
+
 
 void Estatistica::exibirComparacaoComSalario(float salario) const {
     std::cout << "--- Comparação com Salário ---" << std::endl;

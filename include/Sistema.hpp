@@ -15,6 +15,8 @@ private:
     void menuCompras(Operacoes& operacoes); // Menu de compras
     void gerarRelatorio(Operacoes& operacoes); // Geração de relatórios
     void exibirEstatisticas(Operacoes& operacoes);
+    std::string salarioUsuario;
+    std::string usuarioLogado;
 };
 
 #endif

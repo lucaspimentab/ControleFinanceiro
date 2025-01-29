@@ -9,7 +9,7 @@
 class Estatistica {
 public:
     // Construtor: Recebe uma lista de compras para análise estatística.
-    explicit Estatistica(const std::vector<Compra>& compras);
+    Estatistica(const std::vector<Compra>& compras, float salario);
 
     // Calcula os gastos por categoria e armazena no mapa.
     void calcularGastosPorCategoria();         
@@ -29,7 +29,9 @@ private:
     float totalGasto;                                // Total gasto calculado
 
     // Calcula o total gasto somando os valores de todas as compras.
-    void calcularTotalGasto();              
+    void calcularTotalGasto();      
+
+    float salarioUsuario;        
 };
 
 #endif

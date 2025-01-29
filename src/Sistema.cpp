@@ -83,16 +83,32 @@ void Sistema::fazerLogin() {
     std::getline(std::cin, senha);
 
     std::vector<std::string> usuarios = Usuario::carregarUsuarios("data/usuarios.txt");
-    if (Usuario::validarUsuario(nome, senha, usuarios)) {
+
+    std::string salario;
+    if (Usuario::validarUsuario(nome, senha, usuarios, salario)) {
         std::cout << "Bem-vindo, " << nome << "!\n";
+        std::cout << "Salário Mensal: R$ " << salario << "\n";
+
+        // **Armazena o nome e o salário do usuário logado**
+        this->usuarioLogado = nome;
+        this->salarioUsuario = salario; 
+
         Operacoes operacoes(nome);
         operacoes.carregarCompras();
+
+        // Calcular saldo disponível
+        double salarioDouble = std::stod(salario); // Converte string para double
+        double gastosMensais = operacoes.calcularGastosMensais();
+        double saldoDisponivel = salarioDouble - gastosMensais;
+
+        std::cout << "Saldo Disponível: R$ " << saldoDisponivel << "\n";
 
         menuCompras(operacoes);
     } else {
         std::cout << "Usuário ou senha incorretos!\n";
     }
 }
+
 
 
 void Sistema::menuCompras(Operacoes& operacoes) {
@@ -196,15 +212,18 @@ void Sistema::gerarRelatorio(Operacoes& operacoes) {
 void Sistema::exibirEstatisticas(Operacoes& operacoes) {
     std::cout << "--- Estatísticas de Gastos ---\n";
 
-    // Pergunta se o usuário quer estatísticas mensais ou anuais
+    if (salarioUsuario.empty()) {
+        std::cout << "Erro: Nenhum usuário logado!\n";
+        return;
+    }
+
+    int periodo;
     std::cout << "Escolha o período para as estatísticas:\n";
     std::cout << "1. Mensal\n2. Anual\nEscolha uma opção: ";
-    int periodo;
     std::cin >> periodo;
     std::cin.ignore();
 
     int mes = 0, ano = 0;
-
     if (periodo == 1) {
         std::cout << "Digite o mês (1-12): ";
         std::cin >> mes;
@@ -218,11 +237,10 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
         return;
     }
 
-    // Filtra as compras com base no período escolhido (mensal ou anual)
+    // Filtra as compras com base no período escolhido
     std::vector<Compra> comprasFiltradas;
-
     for (const auto& compra : operacoes.getCompras()) {
-        int compraDia = 0, compraMes = 0, compraAno = 0; // Declare as variáveis aqui
+        int compraDia = 0, compraMes = 0, compraAno = 0;
         std::sscanf(compra.getData().c_str(), "%d/%d/%d", &compraDia, &compraMes, &compraAno);
 
         if ((periodo == 1 && compraMes == mes && compraAno == ano) || 
@@ -231,6 +249,8 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
         }
     }
 
-    Estatistica estatistica(comprasFiltradas); // Passa as compras filtradas para a classe Estatistica
-    estatistica.exibirEstatisticas(); // Chama a função exibirEstatisticas de Estatistica
+    // Converte o salário armazenado para float e passa para Estatistica
+    float salario = std::stof(salarioUsuario);
+    Estatistica estatistica(comprasFiltradas, salario);
+    estatistica.exibirEstatisticas();
 }

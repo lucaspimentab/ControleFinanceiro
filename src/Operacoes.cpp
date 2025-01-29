@@ -287,3 +287,22 @@ void Operacoes::listarCategorias() {
         std::cout << i + 1 << ". " << categorias[i] << std::endl;
     }
 }
+
+double Operacoes::calcularGastosMensais() {
+    time_t t = time(0);
+    struct tm* now = localtime(&t);
+    int mesAtual = now->tm_mon + 1;
+    int anoAtual = now->tm_year + 1900;
+
+    double totalGasto = 0.0;
+
+    for (const auto& compra : compras) {
+        int dia, mes, ano;
+        sscanf(compra.getData().c_str(), "%d/%d/%d", &dia, &mes, &ano);
+
+        if (mes == mesAtual && ano == anoAtual) {
+            totalGasto += compra.getValor();
+        }
+    }
+    return totalGasto;
+}

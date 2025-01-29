@@ -14,6 +14,7 @@ private:
 
 public:
     Operacoes(const std::string& nomeUsuario);
+    double calcularGastosMensais();
 
     void addCompra(const Compra& compra);
     void listarCompras();

@@ -4,3 +4,4 @@ lucas;abc
 Marcela;abc
 Esdras Henrique;qwer1234
 a;a
+LucasPimenta;abc;15000

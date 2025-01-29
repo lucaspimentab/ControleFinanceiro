@@ -4,3 +4,5 @@
 200;Transporte;01/01/2024
 10;Alimentação;01/01/2024
 21821;Transporte;01/02/2024
+20000;Saúde;29/01/2025
+20;Alimentação;30/01/2025
