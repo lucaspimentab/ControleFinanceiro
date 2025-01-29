@@ -16,7 +16,9 @@ public:
     std::string criarUsuario() const;
     static void salvarUsuario(const std::string& dados, const std::string& caminho);
     static std::vector<std::string> carregarUsuarios(const std::string& caminho);
-    static bool validarUsuario(const std::string& nome, const std::string& senha, const std::vector<std::string>& usuarios);
+    static bool validarUsuario(const std::string& nome, const std::string& senha, 
+                           const std::vector<std::string>& usuarios, std::string& salario);
+
     static bool usuarioExistente(const std::string& nome, const std::vector<std::string>& usuarios);
 };
 

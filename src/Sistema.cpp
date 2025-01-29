@@ -83,10 +83,21 @@ void Sistema::fazerLogin() {
     std::getline(std::cin, senha);
 
     std::vector<std::string> usuarios = Usuario::carregarUsuarios("data/usuarios.txt");
-    if (Usuario::validarUsuario(nome, senha, usuarios)) {
+    
+    std::string salarioUsuario;
+    if (Usuario::validarUsuario(nome, senha, usuarios, salarioUsuario)) {
         std::cout << "Bem-vindo, " << nome << "!\n";
+        std::cout << "Salário Mensal: R$ " << salarioUsuario << "\n";
+        
         Operacoes operacoes(nome);
         operacoes.carregarCompras();
+
+        // Calcular o saldo disponível
+        double salario = std::stod(salarioUsuario); // Converte string para double
+        double gastosMensais = operacoes.calcularGastosMensais();
+        double saldoDisponivel = salario - gastosMensais;
+
+        std::cout << "Saldo Disponível: R$ " << saldoDisponivel << "\n";
 
         menuCompras(operacoes);
     } else {
