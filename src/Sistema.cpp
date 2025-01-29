@@ -24,8 +24,7 @@ void Sistema::exibirMenuPrincipal() {
 
         // Verifica se a entrada falhou
         if (std::cin.fail()) {
-            std::cin.clear(); // Limpa o erro do cin
-            std::cin.ignore(10000, '\n'); // Remove a entrada inválida do buffer
+            limparEntrada(); // Limpa a entrada
             std::cout << "Opção inválida! Tente novamente.\n";
             continue;
         }
@@ -137,6 +136,12 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         std::cin >> escolha;
         std::cin.ignore();  // Limpa o buffer de entrada
 
+        if (std::cin.fail()) {
+            limparEntrada();  // Limpa o erro de entrada
+            std::cout << "Opção inválida! Tente novamente.\n";
+            continue;
+        }
+
         if (escolha == 1) {
             operacoes.adicionarCompra();
         } else if (escolha == 2) {
@@ -160,6 +165,12 @@ void Sistema::menuCompras(Operacoes& operacoes) {
                 int opcao;
                 std::cin >> opcao;
                 std::cin.ignore();
+
+                if (std::cin.fail()) {
+                    limparEntrada();  // Limpa o erro de entrada
+                    std::cout << "Opção inválida! Tente novamente.\n";
+                    continue;
+                }
 
                 if (opcao == 1) {
                     std::string novoNome;
@@ -195,12 +206,17 @@ void Sistema::menuCompras(Operacoes& operacoes) {
     }
 }
 
-
 void Sistema::gerarRelatorio(Operacoes& operacoes) {
     std::cout << "Deseja gerar um relatório mensal ou anual? (1 para mensal, 2 para anual, 0 para não gerar): ";
     int relatorioEscolha;
     std::cin >> relatorioEscolha;
     std::cin.ignore();
+
+    if (std::cin.fail()) {
+        limparEntrada();  // Limpa o erro de entrada
+        std::cout << "Opção inválida! Tente novamente.\n";
+        return;
+    }
 
     if (relatorioEscolha == 1) {
         int mes, ano;
@@ -235,6 +251,11 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
     std::cin >> periodo;
     std::cin.ignore();
 
+    if (std::cin.fail()) {
+        limparEntrada();  // Limpa o erro de entrada
+        std::cout << "Opção inválida! Tente novamente.\n";
+        return;
+
     int mes = 0, ano = 0;
     if (periodo == 1) {
         std::cout << "Digite o mês (1-12): ";
@@ -265,4 +286,5 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
     float salario = std::stof(salarioUsuario);
     Estatistica estatistica(comprasFiltradas, salario);
     estatistica.exibirEstatisticas();
+    }
 }

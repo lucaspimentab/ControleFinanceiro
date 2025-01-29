@@ -1,11 +1,1 @@
-
 Roberto;abc;30000
-lucas;abc
-Marcela;abc
-Esdras Henrique;qwer1234
-a;a
-LucasPimenta;abc;15000
-Amanda;abc;10000
-LucasBraga;abd123;oi123
-Lucas;ao;1000
-Lucas Pimenta;abcd;10000
