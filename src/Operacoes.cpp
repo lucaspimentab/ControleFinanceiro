@@ -91,16 +91,16 @@ void Operacoes::salvarCompras() {
     std::ofstream arquivo("data/compras-" + nomeUsuario + ".txt");
     for (const auto& compra : compras) {
         // Verifica se a compra é uma compra parcelada
-        if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
-            // Compra parcelada
+        // if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
+        //     // Compra parcelada
+        //     arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
+        //     for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
+        //         arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
+        //     }
+        // } else {
+        //     // Compra à vista
             arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-            for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
-                arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-            }
-        } else {
-            // Compra à vista
-            arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        }
+        // }
     }
 }
 
@@ -109,7 +109,15 @@ void Operacoes::menuCompras() {
         std::cout << "\n--- Menu de Compras ---\n1. Adicionar compra\n2. Listar compras\n3. Logout\nEscolha uma opção: ";
         int escolha;
         std::cin >> escolha;
-        std::cin.ignore();
+        
+        std::cin >> escolha;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Entrada inválida! Por favor, insira um número." << std::endl;
+            continue;
+        }
 
         if (escolha == 1) {
             adicionarCompra();
@@ -177,12 +185,11 @@ void Operacoes::adicionarCompra() {
             return;
         }
 
-        Compra compra(valor, categoriaEscolhida, data);
-        addCompra(compra);
+        addCompra(Compra(valor, categoriaEscolhida, data));
+
         std::cout << "Compra à vista adicionada com sucesso!" << std::endl;
 
     } else if (opcaoPagamento == 2) {
-        // Compra parcelada
         int numParcelas;
         std::cout << "Digite o número de parcelas: ";
         std::cin >> numParcelas;
@@ -202,20 +209,16 @@ void Operacoes::adicionarCompra() {
             return;
         }
 
-        try {
-            ParcelaCompra parcelaCompra(valor, categoriaEscolhida, data, numParcelas);
-            addCompra(parcelaCompra);
-            std::cout << "Compra parcelada adicionada com sucesso!\n";
-
-            // Exibir os valores de cada parcela
-            const auto& parcelas = parcelaCompra.getValoresParcelas();
-            std::cout << "Detalhamento das parcelas:\n";
-            for (size_t i = 0; i < parcelas.size(); ++i) {
-                std::cout << "Parcela " << i + 1 << ": R$ " << parcelas[i] << "\n";
-            }
-        } catch (const std::exception& e) {
-            std::cout << "Erro ao adicionar compra parcelada: " << e.what() << "\n";
-        }
+        ParcelaCompra::ParcelarCompra(valor, categoriaEscolhida, data, numParcelas, *this);
+        
+        // addCompra(parcelaCompra);
+        // Exibir os valores de cada parcela
+        // const auto& parcelas = parcelaCompra.getValoresParcelas();
+        // std::cout << "Detalhamento das parcelas:\n";
+        // for (size_t i = 0; i < parcelas.size(); ++i) {
+        //     std::cout << "Parcela " << i + 1 << ": R$ " << parcelas[i] << "\n";
+        // }
+        std::cout << "Compra parcelada adicionada com sucesso!\n";
     } else {
         std::cout << "Opção de pagamento inválida!\n";
     }
