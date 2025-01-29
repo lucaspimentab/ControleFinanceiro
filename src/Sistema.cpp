@@ -255,6 +255,8 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
         limparEntrada();  // Limpa o erro de entrada
         std::cout << "Opção inválida! Tente novamente.\n";
         return;
+        
+    }
 
     int mes = 0, ano = 0;
     if (periodo == 1) {
@@ -287,4 +289,3 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
     Estatistica estatistica(comprasFiltradas, salario);
     estatistica.exibirEstatisticas();
     }
-}
