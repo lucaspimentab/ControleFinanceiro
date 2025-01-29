@@ -8,7 +8,7 @@ Usuario::Usuario(const std::string& nome, const std::string& senha, const std::s
 
 std::string Usuario::criarUsuario() const {
     std::ostringstream oss;
-    oss << nome << ";" << senha << ";" << salario;
+    oss << nome << ";" << senha << ";" << salario;  // Agora o salário é salvo corretamente
     return oss.str();
 }
 
@@ -34,10 +34,13 @@ std::vector<std::string> Usuario::carregarUsuarios(const std::string& caminho) {
 bool Usuario::validarUsuario(const std::string& nome, const std::string& senha, const std::vector<std::string>& usuarios) {
     for (const auto& usuario : usuarios) {
         std::stringstream ss(usuario);
-        std::string nomeArquivo, senhaArquivo;
+        std::string nomeArquivo, senhaArquivo, salarioArquivo;
         getline(ss, nomeArquivo, ';');
         getline(ss, senhaArquivo, ';');
+        getline(ss, salarioArquivo, ';');  
+
         if (nomeArquivo == nome && senhaArquivo == senha) {
+            std::cout << "Login bem-sucedido!\n";
             return true;
         }
     }
