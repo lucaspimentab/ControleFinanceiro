@@ -5,3 +5,4 @@ Marcela;abc
 Esdras Henrique;qwer1234
 a;a
 LucasPimenta;abc;15000
+Amanda;abc;10000

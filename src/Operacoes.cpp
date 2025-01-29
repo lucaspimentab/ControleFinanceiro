@@ -1,6 +1,7 @@
 #include "Operacoes.hpp"
 #include "Compra.hpp"
 #include "ParcelaCompra.hpp"
+#include "AlertaGastos.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -9,7 +10,8 @@
 #include <string>
 #include <limits>
 
-Operacoes::Operacoes(const std::string& nomeUsuario) : nomeUsuario(nomeUsuario), categoria(nomeUsuario) {} 
+Operacoes::Operacoes(const std::string& nomeUsuario)
+    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0) {}
 
 std::string Operacoes::getUsuario() const {
     return nomeUsuario;
@@ -225,7 +227,13 @@ void Operacoes::adicionarCompra() {
     } else {
         std::cout << "Opção de pagamento inválida!\n";
     }
+
+    float novoSaldo = saldoRestante - valor;
+    alertaGastos.atualizarSaldo(novoSaldo);
+    alertaGastos.verificarAlerta()
 }
+
+
 
 void Operacoes::mudarCategorias() {
     while (true) {
