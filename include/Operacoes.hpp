@@ -34,7 +34,6 @@ public:
     void removerCategoria();
     void listarCategorias();
 
-    // Adicione o getter aqui
     std::string getUsuario() const;  
 };
 

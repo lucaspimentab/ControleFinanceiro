@@ -9,3 +9,5 @@
 100;Alimentação;01/01/2025
 10;Alimentação;01/01/2025
 100;Alimentação;29/01/2025
+50;Transporte;01/02/2025
+50;Transporte;01/03/2025

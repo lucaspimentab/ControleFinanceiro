@@ -2,7 +2,7 @@
 #include "Relatorio.hpp"
 #include <iostream>
 #include <iomanip> // Para std::fixed e std::setprecision
-#include <sstream> // Para manipular strings
+#include <sstream>
 #include <algorithm> // Para std::sort
 
 bool Relatorio::compararPorData(const Compra& a, const Compra& b) {

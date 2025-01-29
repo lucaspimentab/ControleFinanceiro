@@ -21,7 +21,7 @@ void Configuracao::alterarNome(const std::string& novoNome) {
 
         if (nome == novoNome) {
             std::cout << "Erro: O nome de usuário '" << novoNome << "' já está em uso.\n";
-            return; // Sai do método sem alterar nada
+            return;
         }
     }
 

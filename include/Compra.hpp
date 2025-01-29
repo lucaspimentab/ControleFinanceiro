@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "Categoria.hpp" // Inclui a classe Categoria
+#include "Categoria.hpp"
 
 class Compra {
 private:

@@ -13,39 +13,27 @@ void Sistema::iniciar() {
 }
 
 void Sistema::exibirMenuPrincipal() {
-    // while(true){
         std::cout << "--- Bem-vindo ao Sistema de Controle Financeiro ---\n";
         std::cout << "1. Criar usuário\n2. Fazer login\n3. Sair\nEscolha uma opção: ";
         
         int opcao;
         std::cin >> opcao;
-        // if (std::cin.fail())
-        // {
-        //     std::cin.clear();
-        //     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        //     std::cout << "Entrada inválida! Por favor, insira um número." << std::endl;
-        //     continue;
-        // }
         std::cin.ignore();
         if (opcao == 1) {
             criarUsuario();
-            // break;
         } else if (opcao == 2) {
             fazerLogin();
-            // break;
         } else if (opcao == 3) {
             std::cout << "Saindo... Até mais!\n";
-            exit(0); // Saída do programa
+            exit(0);
         } else {
             std::cout << "Opção inválida!\n";
         }
-    // }
 }
 
 void Sistema::criarUsuario() {
     std::string nome, senha, salario;
 
-    // Solicitar nome, senha e salário
     std::cout << "Digite o nome do novo usuário: ";
     std::getline(std::cin, nome);
 
@@ -89,7 +77,7 @@ void Sistema::fazerLogin() {
         std::cout << "Bem-vindo, " << nome << "!\n";
         std::cout << "Salário Mensal: R$ " << salario << "\n";
 
-        // **Armazena o nome e o salário do usuário logado**
+        // Armazena o nome e o salário do usuário logado
         this->usuarioLogado = nome;
         this->salarioUsuario = salario; 
 
@@ -108,8 +96,6 @@ void Sistema::fazerLogin() {
         std::cout << "Usuário ou senha incorretos!\n";
     }
 }
-
-
 
 void Sistema::menuCompras(Operacoes& operacoes) {
     while (true) {
@@ -176,7 +162,7 @@ void Sistema::menuCompras(Operacoes& operacoes) {
                 }
             }
         } else if (escolha == 7) {
-            break;  // Logout
+            break; 
         } else {
             std::cout << "Opção inválida!" << std::endl;
         }

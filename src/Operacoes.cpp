@@ -19,7 +19,7 @@ std::string Operacoes::getUsuario() const {
 
 void Operacoes::addCompra(const Compra& compra) {
     compras.push_back(compra);
-    salvarCompras(); // Salva as compras no arquivo após adicionar
+    salvarCompras();
 }
 
 bool compararPorData(const Compra& a, const Compra& b) {
@@ -95,17 +95,7 @@ void Operacoes::carregarCompras() {
 void Operacoes::salvarCompras() {
     std::ofstream arquivo("data/compras-" + nomeUsuario + ".txt");
     for (const auto& compra : compras) {
-        // Verifica se a compra é uma compra parcelada
-        // if (auto parcelaCompra = dynamic_cast<const ParcelaCompra*>(&compra)) {
-        //     // Compra parcelada
-        //     arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        //     for (int i = 0; i < parcelaCompra->getNumParcelas(); ++i) {
-        //         arquivo << parcelaCompra->getValorParcela(i) << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        //     }
-        // } else {
-        //     // Compra à vista
             arquivo << compra.getValor() << ";" << compra.getCategoria() << ";" << compra.getData() << std::endl;
-        // }
     }
 }
 
@@ -215,25 +205,12 @@ void Operacoes::adicionarCompra() {
         }
 
         ParcelaCompra::ParcelarCompra(valor, categoriaEscolhida, data, numParcelas, *this);
-        
-        // addCompra(parcelaCompra);
-        // Exibir os valores de cada parcela
-        // const auto& parcelas = parcelaCompra.getValoresParcelas();
-        // std::cout << "Detalhamento das parcelas:\n";
-        // for (size_t i = 0; i < parcelas.size(); ++i) {
-        //     std::cout << "Parcela " << i + 1 << ": R$ " << parcelas[i] << "\n";
-        // }
         std::cout << "Compra parcelada adicionada com sucesso!\n";
     } else {
         std::cout << "Opção de pagamento inválida!\n";
     }
 
-    float novoSaldo = saldoRestante - valor;
-    alertaGastos.atualizarSaldo(novoSaldo);
-    alertaGastos.verificarAlerta()
 }
-
-
 
 void Operacoes::mudarCategorias() {
     while (true) {
