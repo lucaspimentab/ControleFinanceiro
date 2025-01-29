@@ -3,12 +3,12 @@
 #include <sstream>
 #include <iostream>
 
-Usuario::Usuario(const std::string& nome, const std::string& senha)
-    : nome(nome), senha(senha) {}
+Usuario::Usuario(const std::string& nome, const std::string& senha, const std::string& salario)
+    : nome(nome), senha(senha), salario(salario) {}
 
 std::string Usuario::criarUsuario() const {
     std::ostringstream oss;
-    oss << nome << ";" << senha;
+    oss << nome << ";" << senha << ";" << salario;
     return oss.str();
 }
 
