@@ -4,6 +4,7 @@
 #include "Operacoes.hpp"
 #include "Relatorio.hpp"
 #include "Estatistica.hpp"
+#include "Configuracao.hpp"
 
 void Sistema::iniciar() {
     while (true) {
@@ -42,11 +43,17 @@ void Sistema::exibirMenuPrincipal() {
 }
 
 void Sistema::criarUsuario() {
-    std::string nome, senha;
+    std::string nome, senha, salario;
+
+    // Solicitar nome, senha e salário
     std::cout << "Digite o nome do novo usuário: ";
     std::getline(std::cin, nome);
+
     std::cout << "Digite a senha: ";
     std::getline(std::cin, senha);
+
+    std::cout << "Digite seu salário mensal em reais: ";
+    std::getline(std::cin, salario);
 
     // Carregar os usuários existentes
     std::vector<std::string> usuarios = Usuario::carregarUsuarios("data/usuarios.txt");
@@ -55,12 +62,16 @@ void Sistema::criarUsuario() {
     if (Usuario::usuarioExistente(nome, usuarios)) {
         std::cout << "Usuário já existe!\n";
     } else {
-        Usuario novoUsuario(nome, senha);
+        // Criar o novo usuário com nome, senha e salário
+        Usuario novoUsuario(nome, senha, salario);
         std::string dados = novoUsuario.criarUsuario();
+
+        // Salvar o novo usuário no arquivo
         Usuario::salvarUsuario(dados, "data/usuarios.txt");
         std::cout << "Usuário criado com sucesso!\n";
     }
 }
+
 
 void Sistema::fazerLogin() {
     std::string nome, senha;
@@ -92,7 +103,8 @@ void Sistema::menuCompras(Operacoes& operacoes) {
                   << "3. Gerar relatório\n"
                   << "4. Ver estatísticas\n"
                   << "5. Mudar categorias\n"
-                  << "6. Logout\n"
+                  << "6. Configuração\n"
+                  << "7. Logout\n"
                   << "Escolha uma opção: ";
         int escolha;
         std::cin >> escolha;
@@ -103,18 +115,58 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         } else if (escolha == 2) {
             operacoes.listarCompras();
         } else if (escolha == 3) {
-            gerarRelatorio(operacoes);  // Passa 'operacoes' como argumento
+            gerarRelatorio(operacoes);
         } else if (escolha == 4) {
-            exibirEstatisticas(operacoes);  // Passa 'operacoes' como argumento
+            exibirEstatisticas(operacoes);
         } else if (escolha == 5) {
             operacoes.mudarCategorias();
         } else if (escolha == 6) {
+            Configuracao configuracao(operacoes.getUsuario(), "data/usuarios.txt");
+            while (true) {
+                std::cout << "\n--- Configuração ---\n"
+                          << "1. Alterar nome\n"
+                          << "2. Alterar senha\n"
+                          << "3. Alterar salário\n"
+                          << "4. Excluir conta\n"
+                          << "5. Voltar\n"
+                          << "Escolha uma opção: ";
+                int opcao;
+                std::cin >> opcao;
+                std::cin.ignore();
+
+                if (opcao == 1) {
+                    std::string novoNome;
+                    std::cout << "Digite o novo nome: ";
+                    std::getline(std::cin, novoNome);
+                    configuracao.alterarNome(novoNome);
+                } else if (opcao == 2) {
+                    std::string novaSenha;
+                    std::cout << "Digite a nova senha: ";
+                    std::getline(std::cin, novaSenha);
+                    configuracao.alterarSenha(novaSenha);
+                } else if (opcao == 3) {
+                    std::string novoSalario;
+                    std::cout << "Digite o novo salário: ";
+                    std::getline(std::cin, novoSalario);
+                    configuracao.alterarSalario(novoSalario);
+                } else if (opcao == 4) {
+                    configuracao.excluirConta();
+                    std::cout << "Conta excluída. Retornando ao menu principal.\n";
+                    return;
+                } else if (opcao == 5) {
+                    break;
+                } else {
+                    std::cout << "Opção inválida!\n";
+                }
+            }
+        } else if (escolha == 7) {
             break;  // Logout
         } else {
             std::cout << "Opção inválida!" << std::endl;
         }
     }
 }
+
 
 void Sistema::gerarRelatorio(Operacoes& operacoes) {
     std::cout << "Deseja gerar um relatório mensal ou anual? (1 para mensal, 2 para anual, 0 para não gerar): ";

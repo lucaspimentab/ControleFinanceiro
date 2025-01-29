@@ -1,5 +1,5 @@
 
-Lucas;abc
+Lucas;abc;20000
 lucas;abc
 Marcela;abc
 Esdras Henrique;qwer1234

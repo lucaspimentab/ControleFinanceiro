@@ -7,10 +7,13 @@
 #include <iomanip>
 #include <algorithm>
 #include <string>
+#include <limits>
 
-Operacoes::Operacoes(const std::string& nomeUsuario) : nomeUsuario(nomeUsuario), categoria(nomeUsuario) {
+Operacoes::Operacoes(const std::string& nomeUsuario) : nomeUsuario(nomeUsuario), categoria(nomeUsuario) {} 
 
-} 
+std::string Operacoes::getUsuario() const {
+    return nomeUsuario;
+}
 
 void Operacoes::addCompra(const Compra& compra) {
     compras.push_back(compra);
