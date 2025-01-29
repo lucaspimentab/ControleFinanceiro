@@ -1,1 +1,2 @@
 Roberto;abc;30000
+Lucas;abc;10000
