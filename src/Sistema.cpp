@@ -123,8 +123,14 @@ void Sistema::fazerLogin() {
 
 void Sistema::menuCompras(Operacoes& operacoes) {
     while (true) {
-        std::cout << "\n--- Menu de Compras ---\n"
-                  << "1. Adicionar compra\n"
+        double salarioDouble = std::stod(salarioUsuario); // Converte string para double
+        double gastosMensais = operacoes.calcularGastosMensais();
+        double saldoDisponivel = salarioDouble - gastosMensais;
+
+        std::cout << "\n--- Menu de Compras ---\n";
+        std::cout << "Salário Mensal: R$ " << salarioUsuario << "\n";
+        std::cout << "Saldo Disponível: R$ " << saldoDisponivel << "\n";
+        std::cout << "1. Adicionar compra\n"
                   << "2. Listar compras\n"
                   << "3. Gerar relatório\n"
                   << "4. Ver estatísticas\n"
