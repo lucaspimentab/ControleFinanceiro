@@ -78,6 +78,7 @@
         "mutex": "cpp",
         "print": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "regex": "cpp"
     }
 }

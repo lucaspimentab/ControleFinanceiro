@@ -1,4 +1,5 @@
 #include <iostream>
+#include <regex>
 #include "Sistema.hpp"
 #include "Usuario.hpp"
 #include "Operacoes.hpp"
@@ -43,17 +44,39 @@ void Sistema::exibirMenuPrincipal() {
     }
 }
 
+// Função auxiliar para validar nome (somente letras e espaços)
+bool validarNome(const std::string& nome) {
+    return std::regex_match(nome, std::regex("^[A-Za-zÀ-ÿ ]+$"));
+}
+
+// Função auxiliar para validar salário (somente números)
+bool validarSalario(const std::string& salario) {
+    return std::regex_match(salario, std::regex("^[0-9]+(\\.[0-9]+)?$"));
+}
+
 void Sistema::criarUsuario() {
     std::string nome, senha, salario;
 
     std::cout << "Digite o nome do novo usuário: ";
     std::getline(std::cin, nome);
 
+    // Validação do nome
+    while (!validarNome(nome)) {
+        std::cout << "Nome inválido! Use apenas letras e espaços. Digite novamente: ";
+        std::getline(std::cin, nome);
+    }
+
     std::cout << "Digite a senha: ";
     std::getline(std::cin, senha);
 
     std::cout << "Digite seu salário mensal em reais: ";
     std::getline(std::cin, salario);
+
+    // Validação do salário
+    while (!validarSalario(salario)) {
+        std::cout << "Salário inválido! Use apenas números. Digite novamente: ";
+        std::getline(std::cin, salario);
+    }
 
     // Carregar os usuários existentes
     std::vector<std::string> usuarios = Usuario::carregarUsuarios("data/usuarios.txt");
@@ -71,7 +94,6 @@ void Sistema::criarUsuario() {
         std::cout << "Usuário criado com sucesso!\n";
     }
 }
-
 
 void Sistema::fazerLogin() {
     std::string nome, senha;
