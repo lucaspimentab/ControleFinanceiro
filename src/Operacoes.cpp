@@ -2,6 +2,7 @@
 #include "Compra.hpp"
 #include "ParcelaCompra.hpp"
 #include "AlertaGastos.hpp"
+#include "Utils.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -222,7 +223,7 @@ void Operacoes::mudarCategorias() {
         std::cout << "\n--- Mudar Categorias ---\n1. Adicionar categoria\n2. Remover categoria\n3. Listar categorias\n4. Voltar\nEscolha uma opção: ";
         int escolha;
         std::cin >> escolha;
-        std::cin.ignore();
+        limparEntrada();
 
         if (escolha == 1) {
             adicionarCategoria();
