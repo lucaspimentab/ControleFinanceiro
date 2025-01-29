@@ -13,12 +13,23 @@ void Sistema::iniciar() {
 }
 
 void Sistema::exibirMenuPrincipal() {
-        std::cout << "--- Bem-vindo ao Sistema de Controle Financeiro ---\n";
+    while (true) {
+        std::cout << "\n--- Bem-vindo ao Sistema de Controle Financeiro ---\n";
         std::cout << "1. Criar usuário\n2. Fazer login\n3. Sair\nEscolha uma opção: ";
-        
+
         int opcao;
         std::cin >> opcao;
+
+        // Verifica se a entrada falhou
+        if (std::cin.fail()) {
+            std::cin.clear(); // Limpa o erro do cin
+            std::cin.ignore(10000, '\n'); // Remove a entrada inválida do buffer
+            std::cout << "Opção inválida! Tente novamente.\n";
+            continue;
+        }
+
         std::cin.ignore();
+
         if (opcao == 1) {
             criarUsuario();
         } else if (opcao == 2) {
@@ -27,8 +38,9 @@ void Sistema::exibirMenuPrincipal() {
             std::cout << "Saindo... Até mais!\n";
             exit(0);
         } else {
-            std::cout << "Opção inválida!\n";
+            std::cout << "Opção inválida! Tente novamente.\n";
         }
+    }
 }
 
 void Sistema::criarUsuario() {
