@@ -35,6 +35,7 @@ public:
     void listarCategorias();
 
     std::string getUsuario() const;  
+    void setUsuario(const std::string& novoNome);
 };
 
 #endif

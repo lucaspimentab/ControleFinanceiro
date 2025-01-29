@@ -153,6 +153,7 @@ void Sistema::menuCompras(Operacoes& operacoes) {
                     std::cout << "Digite o novo nome: ";
                     std::getline(std::cin, novoNome);
                     configuracao.alterarNome(novoNome);
+                    operacoes.setUsuario(novoNome);
                 } else if (opcao == 2) {
                     std::string novaSenha;
                     std::cout << "Digite a nova senha: ";

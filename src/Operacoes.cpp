@@ -17,6 +17,11 @@ std::string Operacoes::getUsuario() const {
     return nomeUsuario;
 }
 
+void Operacoes::setUsuario(const std::string& novoNome) {
+    nomeUsuario = novoNome;
+}
+
+
 void Operacoes::addCompra(const Compra& compra) {
     compras.push_back(compra);
     salvarCompras();
