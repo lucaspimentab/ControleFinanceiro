@@ -11,16 +11,10 @@
 #include <string>
 #include <limits>
 
-Operacoes::Operacoes(const std::string& nomeUsuario, float salario, float saldo)
-    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(saldo), salarioUsuario(salario), diaAtual(0),
-      alertaGastos(salario, saldo, diaAtual) {
-}
-
 Operacoes::Operacoes(const std::string& nomeUsuario)
     : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0),
       alertaGastos(0.0f, 0.0f, diaAtual) {
 }
-
 
 
 std::string Operacoes::getUsuario() const {
@@ -118,8 +112,6 @@ void Operacoes::menuCompras() {
     while (true) {
         std::cout << "\n--- Menu de Compras ---\n1. Adicionar compra\n2. Listar compras\n3. Logout\nEscolha uma opção: ";
         int escolha;
-        std::cin >> escolha;
-        
         std::cin >> escolha;
 
         if (std::cin.fail()) {
@@ -231,11 +223,11 @@ void Operacoes::adicionarCompra(double salario) {
     }
 
     // Atualiza o saldo no objeto Operacoes
-    atualizarSaldo(salario - calcularGastosMensais());  // Agora chamando corretamente
+    atualizarSaldo(salario - calcularGastosMensais());
 
     // Atualiza o alerta de gastos
-    alertaGastos.atualizarSaldo(saldoDisponivel);  // Atualiza o saldo
-    alertaGastos.atualizarSalario(salario);  // Atualiza o salário (adicionar um método de atualização na classe AlertaGastos)
+    alertaGastos.atualizarSaldo(saldoDisponivel); 
+    alertaGastos.atualizarSalario(salario);  
     alertaGastos.verificarAlerta();
 }
 
@@ -266,7 +258,7 @@ void Operacoes::adicionarCategoria() {
     std::cout << "Digite o nome da nova categoria: ";
     std::getline(std::cin, novaCategoria);
 
-    categoria.adicionarCategoria(novaCategoria, nomeUsuario); // Passando nomeUsuario
+    categoria.adicionarCategoria(novaCategoria, nomeUsuario);
     std::cout << "Categoria adicionada com sucesso!" << std::endl;
 }
 
@@ -284,7 +276,7 @@ void Operacoes::removerCategoria() {
     }
 
     std::string categoriaRemover = categoria.obterCategorias()[opcao - 1];
-    categoria.excluirCategoria(categoriaRemover, nomeUsuario); // Passando nomeUsuario
+    categoria.excluirCategoria(categoriaRemover, nomeUsuario);
     std::cout << "Categoria removida com sucesso!" << std::endl;
 }
 
@@ -321,5 +313,5 @@ double Operacoes::calcularGastosMensais() {
 }
 
 void Operacoes::atualizarSaldo(float novoSaldo) {
-    saldoDisponivel = novoSaldo; // Atualiza diretamente o saldo
+    saldoDisponivel = novoSaldo;
 }
