@@ -292,6 +292,9 @@ void Sistema::exibirEstatisticas(Operacoes& operacoes) {
 
     // Converte o salário armazenado para float e passa para Estatistica
     float salario = std::stof(salarioUsuario);
+    if (periodo == 2) {  
+    salario *= 12;
+}
     Estatistica estatistica(comprasFiltradas, salario);
     estatistica.exibirEstatisticas();
     }

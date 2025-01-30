@@ -11,8 +11,15 @@
 #include <string>
 #include <limits>
 
+// Implementação do construtor
+Operacoes::Operacoes(const std::string& nomeUsuario, float salario, float saldo)
+    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(saldo), salarioUsuario(salario), diaAtual(0),
+      alertaGastos(salario, saldo, diaAtual) {}
+
 Operacoes::Operacoes(const std::string& nomeUsuario)
-    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0) {}
+    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0),
+      alertaGastos(0.0f, 0.0f, diaAtual) {}  // Inicializa alertaGastos com valores padrão
+
 
 std::string Operacoes::getUsuario() const {
     return nomeUsuario;
@@ -146,7 +153,7 @@ void Operacoes::adicionarCompra() {
     }
 
     // Acessa as categorias disponíveis
-    const auto& categorias = categoria.obterCategorias(); 
+    const auto& categorias = categoria.obterCategorias();
     if (categorias.empty()) {
         std::cout << "Nenhuma categoria disponível. Adicione uma antes de continuar." << std::endl;
         return;
@@ -187,6 +194,8 @@ void Operacoes::adicionarCompra() {
         }
 
         addCompra(Compra(valor, categoriaEscolhida, data));
+        saldoDisponivel -= valor;  // Atualiza o saldo após a compra
+        atualizarSaldo(saldoDisponivel);  // Atualiza o saldo no objeto
 
         std::cout << "Compra à vista adicionada com sucesso!" << std::endl;
 
@@ -211,12 +220,18 @@ void Operacoes::adicionarCompra() {
         }
 
         ParcelaCompra::ParcelarCompra(valor, categoriaEscolhida, data, numParcelas, *this);
+        saldoDisponivel -= valor;  // Atualiza o saldo após a compra
+        atualizarSaldo(saldoDisponivel);  // Atualiza o saldo no objeto
+
         std::cout << "Compra parcelada adicionada com sucesso!\n";
     } else {
         std::cout << "Opção de pagamento inválida!\n";
     }
 
+    // Verificar alertas de saldo após a atualização do saldo
+    alertaGastos.verificarAlerta();  // Verifica se o alerta de saldo precisa ser mostrado
 }
+
 
 void Operacoes::mudarCategorias() {
     while (true) {
@@ -296,4 +311,9 @@ double Operacoes::calcularGastosMensais() {
         }
     }
     return totalGasto;
+}
+
+void Operacoes::atualizarSaldo(float novoSaldo) {
+    saldoDisponivel = novoSaldo;  // Atualiza o saldo no objeto
+    alertaGastos.atualizarSaldo(saldoDisponivel);  // Atualiza o alerta com o novo saldo
 }

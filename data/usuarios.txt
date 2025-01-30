@@ -1,2 +1,6 @@
 Roberto Silva;abc;30000
 Lucas;abc;10000
+LucasPimenta;abc;5000
+Esdras;abc;10000
+Oi;abc;10000
+Roberto;abc;3000

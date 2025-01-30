@@ -5,6 +5,7 @@
 #include <string>
 #include "Compra.hpp"
 #include "Categoria.hpp"
+#include "AlertaGastos.hpp"
 
 class Operacoes {
 private:
@@ -14,10 +15,12 @@ private:
     float saldoDisponivel;  // Saldo disponível do usuário
     float salarioUsuario;   // Salário do usuário
     int diaAtual;           // Dia atual do sistema
+    AlertaGastos alertaGastos;
 
 public:
     Operacoes(float salario, float saldo, int dia);
     Operacoes(const std::string& nomeUsuario);
+     Operacoes(const std::string& nomeUsuario, float salario, float saldo);
     double calcularGastosMensais();
 
     void addCompra(const Compra& compra);
@@ -36,6 +39,8 @@ public:
 
     std::string getUsuario() const;  
     void setUsuario(const std::string& novoNome);
+
+    void atualizarSaldo(float novoSaldo);
 };
 
 #endif
