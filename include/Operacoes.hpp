@@ -20,7 +20,7 @@ private:
 public:
     Operacoes(float salario, float saldo, int dia);
     Operacoes(const std::string& nomeUsuario);
-     Operacoes(const std::string& nomeUsuario, float salario, float saldo);
+    Operacoes(const std::string& nomeUsuario, float salario, float saldo);
     double calcularGastosMensais();
 
     void addCompra(const Compra& compra);
@@ -30,7 +30,7 @@ public:
     void carregarCompras();
     void salvarCompras();
     void menuCompras();
-    void adicionarCompra();
+    void adicionarCompra(double salario);
 
     void mudarCategorias();
     void adicionarCategoria();
@@ -41,6 +41,7 @@ public:
     void setUsuario(const std::string& novoNome);
 
     void atualizarSaldo(float novoSaldo);
+    void atualizarAlertaGastos(double saldo, double salario);
 };
 
 #endif

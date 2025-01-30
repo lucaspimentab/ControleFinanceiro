@@ -11,14 +11,10 @@
 #include <string>
 #include <limits>
 
-// Implementação do construtor
-Operacoes::Operacoes(const std::string& nomeUsuario, float salario, float saldo)
-    : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(saldo), salarioUsuario(salario), diaAtual(0),
-      alertaGastos(salario, saldo, diaAtual) {}
-
 Operacoes::Operacoes(const std::string& nomeUsuario)
     : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0),
-      alertaGastos(0.0f, 0.0f, diaAtual) {}  // Inicializa alertaGastos com valores padrão
+      alertaGastos(0.0f, 0.0f, diaAtual) {
+}
 
 
 std::string Operacoes::getUsuario() const {
@@ -117,8 +113,6 @@ void Operacoes::menuCompras() {
         std::cout << "\n--- Menu de Compras ---\n1. Adicionar compra\n2. Listar compras\n3. Logout\nEscolha uma opção: ";
         int escolha;
         std::cin >> escolha;
-        
-        std::cin >> escolha;
 
         if (std::cin.fail()) {
             std::cin.clear();
@@ -128,7 +122,7 @@ void Operacoes::menuCompras() {
         }
 
         if (escolha == 1) {
-            adicionarCompra();
+            adicionarCompra(salarioUsuario);
         } else if (escolha == 2) {
             listarCompras();
         } else if (escolha == 3) {
@@ -139,7 +133,7 @@ void Operacoes::menuCompras() {
     }
 }
 
-void Operacoes::adicionarCompra() {
+void Operacoes::adicionarCompra(double salario) {
     float valor;
     std::string categoriaEscolhida;
 
@@ -228,8 +222,13 @@ void Operacoes::adicionarCompra() {
         std::cout << "Opção de pagamento inválida!\n";
     }
 
-    // Verificar alertas de saldo após a atualização do saldo
-    alertaGastos.verificarAlerta();  // Verifica se o alerta de saldo precisa ser mostrado
+    // Atualiza o saldo no objeto Operacoes
+    atualizarSaldo(salario - calcularGastosMensais());
+
+    // Atualiza o alerta de gastos
+    alertaGastos.atualizarSaldo(saldoDisponivel); 
+    alertaGastos.atualizarSalario(salario);  
+    alertaGastos.verificarAlerta();
 }
 
 
@@ -259,7 +258,7 @@ void Operacoes::adicionarCategoria() {
     std::cout << "Digite o nome da nova categoria: ";
     std::getline(std::cin, novaCategoria);
 
-    categoria.adicionarCategoria(novaCategoria, nomeUsuario); // Passando nomeUsuario
+    categoria.adicionarCategoria(novaCategoria, nomeUsuario);
     std::cout << "Categoria adicionada com sucesso!" << std::endl;
 }
 
@@ -277,7 +276,7 @@ void Operacoes::removerCategoria() {
     }
 
     std::string categoriaRemover = categoria.obterCategorias()[opcao - 1];
-    categoria.excluirCategoria(categoriaRemover, nomeUsuario); // Passando nomeUsuario
+    categoria.excluirCategoria(categoriaRemover, nomeUsuario);
     std::cout << "Categoria removida com sucesso!" << std::endl;
 }
 
@@ -314,6 +313,5 @@ double Operacoes::calcularGastosMensais() {
 }
 
 void Operacoes::atualizarSaldo(float novoSaldo) {
-    saldoDisponivel = novoSaldo;  // Atualiza o saldo no objeto
-    alertaGastos.atualizarSaldo(saldoDisponivel);  // Atualiza o alerta com o novo saldo
+    saldoDisponivel = novoSaldo;
 }
