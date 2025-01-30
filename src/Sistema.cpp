@@ -126,6 +126,8 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         double salarioDouble = std::stod(salarioUsuario); // Converte string para double
         double gastosMensais = operacoes.calcularGastosMensais();
         double saldoDisponivel = salarioDouble - gastosMensais;
+        operacoes.atualizarSaldo(saldoDisponivel); 
+        operacoes.atualizarAlertaGastos(saldoDisponivel, salarioDouble);
 
         std::cout << "\n--- Menu de Compras ---\n";
         std::cout << "Salário Mensal: R$ " << salarioUsuario << "\n";

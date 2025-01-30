@@ -11,14 +11,16 @@
 #include <string>
 #include <limits>
 
-// Implementação do construtor
 Operacoes::Operacoes(const std::string& nomeUsuario, float salario, float saldo)
     : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(saldo), salarioUsuario(salario), diaAtual(0),
-      alertaGastos(salario, saldo, diaAtual) {}
+      alertaGastos(salario, saldo, diaAtual) {
+}
 
 Operacoes::Operacoes(const std::string& nomeUsuario)
     : nomeUsuario(nomeUsuario), categoria(nomeUsuario), saldoDisponivel(0.0f), salarioUsuario(0.0f), diaAtual(0),
-      alertaGastos(0.0f, 0.0f, diaAtual) {}  // Inicializa alertaGastos com valores padrão
+      alertaGastos(0.0f, 0.0f, diaAtual) {
+}
+
 
 
 std::string Operacoes::getUsuario() const {
@@ -228,8 +230,6 @@ void Operacoes::adicionarCompra() {
         std::cout << "Opção de pagamento inválida!\n";
     }
 
-    // Verificar alertas de saldo após a atualização do saldo
-    alertaGastos.verificarAlerta();  // Verifica se o alerta de saldo precisa ser mostrado
 }
 
 
@@ -313,7 +313,14 @@ double Operacoes::calcularGastosMensais() {
     return totalGasto;
 }
 
+
+void Operacoes::atualizarAlertaGastos(double saldo, double salario) {
+    alertaGastos.atualizarSaldo(saldo);  // Atualiza o saldo
+    alertaGastos.atualizarSalario(salario);  // Atualiza o salário (adicionar um método de atualização na classe AlertaGastos)
+    alertaGastos.verificarAlerta();
+}
+
+
 void Operacoes::atualizarSaldo(float novoSaldo) {
-    saldoDisponivel = novoSaldo;  // Atualiza o saldo no objeto
-    alertaGastos.atualizarSaldo(saldoDisponivel);  // Atualiza o alerta com o novo saldo
+    saldoDisponivel = novoSaldo;  // Atualiza o saldo disponível
 }
