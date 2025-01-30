@@ -1,13 +1,2 @@
-Roberto Silva;abc;30000
-Lucas;abc;10000
-LucasPimenta;abc;5000
-Esdras;abc;10000
-Oi;abc;10000
-Roberto;abc;3000
-LucasP;abc;123
-LucasE;abc;1000
-Gabi;abc;10000
-Silva;abc;1000
-Marcelly;abc;1000
-Luciene;abc;1000
-Teste;abc;1000
+Lucas;abcd;3000
+Esdras;abc;1000

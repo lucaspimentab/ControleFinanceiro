@@ -1,6 +1,0 @@
-500;Alimentação;01/01/2025
-800;Alimentação;02/02/2025
-400;Alimentação;01/01/2025
-10000;Alimentação;10/10/2025
-100;Alimentação;01/01/2025
-1;Alimentação;01/01/2025
