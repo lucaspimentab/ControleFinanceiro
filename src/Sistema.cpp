@@ -127,7 +127,6 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         double gastosMensais = operacoes.calcularGastosMensais();
         double saldoDisponivel = salarioDouble - gastosMensais;
         operacoes.atualizarSaldo(saldoDisponivel); 
-        operacoes.atualizarAlertaGastos(saldoDisponivel, salarioDouble);
 
         std::cout << "\n--- Menu de Compras ---\n";
         std::cout << "Salário Mensal: R$ " << salarioUsuario << "\n";
@@ -151,7 +150,7 @@ void Sistema::menuCompras(Operacoes& operacoes) {
         }
 
         if (escolha == 1) {
-            operacoes.adicionarCompra();
+            operacoes.adicionarCompra(std::stod(salarioUsuario));
         } else if (escolha == 2) {
             operacoes.listarCompras();
         } else if (escolha == 3) {

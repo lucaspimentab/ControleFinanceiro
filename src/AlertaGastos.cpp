@@ -10,7 +10,6 @@ void AlertaGastos::atualizarSaldo(float novoSaldo) {
 }
 
 void AlertaGastos::verificarAlerta() const {
-
     // Limites de alerta baseados no salário
     float limiteCritico = salario * 0.1;  // Se gastar mais de 90% do salário
 

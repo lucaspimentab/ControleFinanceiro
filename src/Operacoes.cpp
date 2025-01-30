@@ -130,7 +130,7 @@ void Operacoes::menuCompras() {
         }
 
         if (escolha == 1) {
-            adicionarCompra();
+            adicionarCompra(salarioUsuario);
         } else if (escolha == 2) {
             listarCompras();
         } else if (escolha == 3) {
@@ -141,7 +141,7 @@ void Operacoes::menuCompras() {
     }
 }
 
-void Operacoes::adicionarCompra() {
+void Operacoes::adicionarCompra(double salario) {
     float valor;
     std::string categoriaEscolhida;
 
@@ -230,6 +230,13 @@ void Operacoes::adicionarCompra() {
         std::cout << "Opção de pagamento inválida!\n";
     }
 
+    // Atualiza o saldo no objeto Operacoes
+    atualizarSaldo(salario - calcularGastosMensais());  // Agora chamando corretamente
+
+    // Atualiza o alerta de gastos
+    alertaGastos.atualizarSaldo(saldoDisponivel);  // Atualiza o saldo
+    alertaGastos.atualizarSalario(salario);  // Atualiza o salário (adicionar um método de atualização na classe AlertaGastos)
+    alertaGastos.verificarAlerta();
 }
 
 
@@ -313,14 +320,6 @@ double Operacoes::calcularGastosMensais() {
     return totalGasto;
 }
 
-
-void Operacoes::atualizarAlertaGastos(double saldo, double salario) {
-    alertaGastos.atualizarSaldo(saldo);  // Atualiza o saldo
-    alertaGastos.atualizarSalario(salario);  // Atualiza o salário (adicionar um método de atualização na classe AlertaGastos)
-    alertaGastos.verificarAlerta();
-}
-
-
 void Operacoes::atualizarSaldo(float novoSaldo) {
-    saldoDisponivel = novoSaldo;  // Atualiza o saldo disponível
+    saldoDisponivel = novoSaldo; // Atualiza diretamente o saldo
 }

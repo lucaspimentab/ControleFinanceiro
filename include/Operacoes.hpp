@@ -30,7 +30,7 @@ public:
     void carregarCompras();
     void salvarCompras();
     void menuCompras();
-    void adicionarCompra();
+    void adicionarCompra(double salario);
 
     void mudarCategorias();
     void adicionarCategoria();
