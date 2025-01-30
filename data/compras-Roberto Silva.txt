@@ -9,4 +9,3 @@
 50;Alimentação;10/01/2025
 50;Alimentação;10/01/2025
 100;Alimentação;10/02/2025
-100;Alimentação;01/01/2025
