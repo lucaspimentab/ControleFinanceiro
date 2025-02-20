@@ -4,7 +4,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#pragma comment(lib, "winmm.lib")
+//#pragma comment(lib, "winmm.lib")
 #endif
 
 void MidiaControll::playAudio(const std::string &baseFilePath)
