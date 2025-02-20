@@ -1,0 +1,8 @@
+10;Alimentação;01/01/2025
+1000;Alimentação;01/01/2025
+10;Alimentação;20/02/2025
+1e+17;Alimentação;01/01/2025
+100;Alimentação;01/01/2025
+500;Alimentação;01/01/2025
+500;Alimentação;01/02/2025
+1000;Alimentação;01/02/2025

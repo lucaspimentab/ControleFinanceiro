@@ -19,7 +19,7 @@ all: $(EXEC)
 
 # Como gerar o executável a partir dos objetos
 $(EXEC): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(EXEC)
+	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(EXEC) -lwinmm
 
 # Como compilar arquivos .cpp em .o
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
